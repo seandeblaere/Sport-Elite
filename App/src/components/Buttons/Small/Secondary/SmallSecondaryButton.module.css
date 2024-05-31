@@ -1,0 +1,19 @@
+.btn {
+  color: #fdfbfa;
+  background: #131316;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 0;
+  outline: 0;
+  font-size: 1rem;
+  padding: 0.5rem 2rem;
+  display: inline-block;
+  transform: skew(-21deg);
+}
+
+.btn > span {
+  display: inline-block;
+  transform: skew(21deg);
+}
