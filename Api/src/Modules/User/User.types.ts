@@ -12,8 +12,8 @@ export type User = Document &
     email: string;
     password: string;
     name: string;
-    seller: boolean;
-    admin: boolean;
+    seller?: boolean;
+    admin?: boolean;
     favorites: ObjectId[];
     orders: ObjectId[];
   };
