@@ -19,7 +19,7 @@ const createOrder = async (req: Request, res: Response, next: NextFunction) => {
           );
         }
         total += product.price * item.quantity;
-        return { product: product.id, quantity: item.quantity };
+        return { productId: product.id, quantity: item.quantity };
       })
     );
 
@@ -44,7 +44,7 @@ const getOrders = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { user } = req as AuthRequest;
     const orders = await OrderModel.find({ userId: user.id }).populate(
-      "products.product"
+      "products.productId"
     );
     res.json(orders);
   } catch (err) {

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import style from "./BigPrimaryButton.module.css";
+import style from "./BigPimaryButton.module.css";
 
 const BigPrimaryButton = ({ to, label }) => {
   return (
