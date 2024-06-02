@@ -1,7 +1,12 @@
 import React from "react";
 import style from "./Dropdown.module.css";
 
-const Dropdown = ({ categories, onChange }) => {
+interface DropdownProps {
+  categories: string[];
+  onChange: (value: string) => void;
+}
+
+const Dropdown: React.FC<DropdownProps> = ({ categories, onChange }) => {
   return (
     <select
       className={style.dropdown}

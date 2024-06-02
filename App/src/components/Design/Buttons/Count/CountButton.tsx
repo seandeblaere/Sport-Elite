@@ -1,7 +1,15 @@
 import React, { useState } from "react";
 import styles from "./CountButton.module.css";
 
-const CountButton = ({ initialCount = 1, onCountChange }) => {
+interface CountButtonProps {
+  initialCount?: number;
+  onCountChange?: (count: number) => void;
+}
+
+const CountButton: React.FC<CountButtonProps> = ({
+  initialCount = 1,
+  onCountChange,
+}) => {
   const [count, setCount] = useState(initialCount);
 
   const handleDecrement = () => {

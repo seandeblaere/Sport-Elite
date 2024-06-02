@@ -1,14 +1,13 @@
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
-import Dashboard from "./components/Pages/Dashboard//Dashboard";
+import { Route } from "react-router-dom";
+import Dashboard from "./components/Pages/Dashboard/Dashboard";
+import ROUTES from "./consts/Routes";
 import AuthContainer from "./components/Context/AuthContainer";
 
 function App() {
   return (
     <AuthContainer>
-      <Routes>
-        <Route path="/dashboard" element={<Dashboard />} />
-      </Routes>
+      <Route path={ROUTES.dashboard} element={<Dashboard />} />
     </AuthContainer>
   );
 }

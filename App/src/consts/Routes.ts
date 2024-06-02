@@ -5,6 +5,7 @@ const ROUTES = {
   register: "/register",
   dashboard: "/dashboard",
   products: "/products",
+  productDetail: "/products/:productId",
 };
 
 export default ROUTES;

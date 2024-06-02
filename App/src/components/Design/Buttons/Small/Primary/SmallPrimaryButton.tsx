@@ -2,8 +2,18 @@ import React from "react";
 import { Link } from "react-router-dom";
 import style from "./SmallPrimaryButton.module.css";
 
-const SmallPrimaryButton = ({ label, isHovered, to }) => {
-  const buttonStyle = isHovered
+interface SmallPrimaryButtonProps {
+  label: string;
+  isHovered: boolean;
+  to: string;
+}
+
+const SmallPrimaryButton: React.FC<SmallPrimaryButtonProps> = ({
+  label,
+  isHovered,
+  to,
+}) => {
+  const buttonStyle: React.CSSProperties = isHovered
     ? {
         backgroundColor: "#ff293b",
         color: "#FDFBFA",

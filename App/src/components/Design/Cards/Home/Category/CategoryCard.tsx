@@ -3,7 +3,17 @@ import style from "./CategoryCard.module.css";
 import { Link } from "react-router-dom";
 import SmallPrimaryButton from "../../../Buttons/Small/Primary/SmallPrimaryButton";
 
-const CategoryCard = ({ imageUrl, link, buttonLabel }) => {
+interface CategoryCardProps {
+  imageUrl: string;
+  link: string;
+  buttonLabel: string;
+}
+
+const CategoryCard: React.FC<CategoryCardProps> = ({
+  imageUrl,
+  link,
+  buttonLabel,
+}) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseEnter = () => {
