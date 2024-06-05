@@ -6,7 +6,7 @@ const Profile = () => {
     <>
       <Header />
       <div>
-        <h1>Shopping Cart</h1>
+        <h1>Profile</h1>
       </div>
     </>
   );

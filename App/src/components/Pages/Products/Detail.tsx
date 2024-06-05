@@ -5,11 +5,15 @@ import style from "./Detail.module.css";
 import CountButton from "../../../components/Design/Buttons/Count/CountButton";
 import BigPrimaryButton from "../../../components/Design/Buttons/Big/Primary/BigPrimaryButton";
 import Header from "../../../components/Design/Header/Header";
+import FavoriteButton from "../../../components/Design/Buttons/Favorite/FavoriteButton";
+import { useAuth } from "../../../components/Context/AuthContainer";
+import ContactSeller from "../../../components/Contact/ContactSeller";
 
 const ProductDetail: React.FC = () => {
   const location = useLocation();
   const productData = location.state?.productData as Product;
   const [count, setCount] = useState<number>(1);
+  const { user } = useAuth();
 
   if (!productData) {
     return <div>Product not found.</div>;
@@ -21,16 +25,26 @@ const ProductDetail: React.FC = () => {
       (item: any) => item.id === productData._id
     );
 
+    const cartItem = {
+      id: productData._id,
+      name: productData.name,
+      price: productData.price,
+      imageUrl: productData.imageUrl,
+      grip: productData.grip,
+      brand: productData.brand,
+      sellerId: productData.sellerId,
+      quantity: count,
+    };
+
     if (itemIndex > -1) {
       cartItems[itemIndex].quantity += count;
     } else {
-      cartItems.push({ ...productData, quantity: count });
+      cartItems.push(cartItem);
     }
 
     localStorage.setItem("cart", JSON.stringify(cartItems));
     alert("Product added to cart!");
   };
-
   return (
     <>
       <Header />
@@ -65,19 +79,28 @@ const ProductDetail: React.FC = () => {
                       <span className={style["delivered"]}>delivered</span>
                       tomorrow
                     </p>
+                    <FavoriteButton productId={productData._id} />
                   </div>
                   <div className={style["btn-container"]}>
                     <CountButton
                       initialCount={count}
                       onCountChange={(newCount) => setCount(newCount)}
                     />
-                    <BigPrimaryButton
-                      onClick={handleAddToCart}
-                      label="Add to shopping cart"
-                    />
+                    <div className={style["primary-btn-container"]}>
+                      <BigPrimaryButton
+                        onClick={handleAddToCart}
+                        label="Add to shopping cart"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
+              {user && user._id !== productData.sellerId && (
+                <ContactSeller
+                  sellerId={productData.sellerId}
+                  productId={productData._id}
+                />
+              )}
             </div>
           </div>
         </div>

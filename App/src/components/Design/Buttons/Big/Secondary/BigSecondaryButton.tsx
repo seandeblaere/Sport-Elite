@@ -1,21 +1,20 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import style from "./BigSecondaryButton.module.css";
 
 interface BigSecondaryButtonProps {
-  to: string;
+  onClick: () => void;
   label: string;
 }
 
-const BigSecondaryButton: React.FC<BigSecondaryButtonProps> = ({
-  to,
+const BigPrimaryButton: React.FC<BigSecondaryButtonProps> = ({
+  onClick,
   label,
 }) => {
   return (
-    <Link to={to} className={style.btn}>
+    <button className={style.btn} onClick={onClick}>
       {label}
-    </Link>
+    </button>
   );
 };
 
-export default BigSecondaryButton;
+export default BigPrimaryButton;
