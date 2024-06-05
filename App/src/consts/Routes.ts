@@ -7,6 +7,7 @@ const ROUTES = {
   productDetail: "/products/:productId",
   productCreate: "/create",
   shoppingCart: "/cart",
+  conversations: "/conversations",
   notFound: "*",
 };
 

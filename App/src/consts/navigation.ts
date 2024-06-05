@@ -22,6 +22,7 @@ const useNavigation = () => {
         return [
           ...baseNavigation,
           { label: "Dashboard", link: "/dashboard" },
+          { label: "Conversations", link: "/conversations" },
           { label: "Logout", link: "/logout" },
         ];
       }

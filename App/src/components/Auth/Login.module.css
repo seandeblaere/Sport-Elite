@@ -1,5 +1,5 @@
 .content-wrapper {
-  background-color: #0c2ff2;
+  background-color: #f1f0f0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -12,10 +12,11 @@ h2 {
 }
 
 .form-container {
-  background-color: #f1f0f0;
+  background-color: #fdfbfa;
   width: 35rem;
   padding: 2rem 5rem;
   border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .form-container label {

@@ -1,10 +1,14 @@
+import React, { useEffect, useState } from "react";
 import { useAuth } from "../../Context/AuthContainer";
 import Header from "../../../components/Design/Header/Header";
-import style from "./Dashboard.module.css";
-import { useEffect, useState } from "react";
 import { Product } from "../../../core/modules/products/products.types";
-import { getProducts } from "../../../core/modules/products/products.api";
+import {
+  getProducts,
+  createProduct,
+} from "../../../core/modules/products/products.api";
 import ProductCard from "../../../components/Design/Cards/Products/ProductCard";
+import ProductForm from "../../Form/ProductForm";
+import style from "./Dashboard.module.css";
 
 const Dashboard = () => {
   const { user } = useAuth();
@@ -36,11 +40,28 @@ const Dashboard = () => {
     return filteredProducts;
   };
 
+  const handleProductSubmit = async (
+    product: Omit<Product, "_id" | "sellerId">
+  ) => {
+    if (user) {
+      const productToCreate = { ...product, sellerId: user._id };
+      try {
+        await createProduct(productToCreate);
+        const fetchedProducts = await fetchProducts(user._id);
+        setProducts(fetchedProducts);
+      } catch (error) {
+        console.error("Error creating product:", error);
+      }
+    }
+  };
+
   return (
     <>
       <Header />
       <div className={style["content-wrapper"]}>
         <h2>Welcome, {user ? user.name : "Guest"}</h2>
+        <h3>Create a product</h3>
+        <ProductForm onSubmit={handleProductSubmit} />
         <h3>Your Products</h3>
         <div className={style["products"]}>
           {loading ? (

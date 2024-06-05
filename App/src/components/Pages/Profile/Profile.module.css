@@ -18,7 +18,7 @@ h3 {
 .favorites {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 0.5rem;
   margin-bottom: 2rem;
 }
 

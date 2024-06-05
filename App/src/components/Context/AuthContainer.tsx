@@ -63,7 +63,7 @@ const AuthContainer = ({ children }: { children: ReactNode }) => {
     if (user?.seller || user?.admin) {
       navigate("/dashboard");
     } else {
-      navigate("/products");
+      navigate("/");
     }
   };
 
@@ -71,6 +71,7 @@ const AuthContainer = ({ children }: { children: ReactNode }) => {
     setUser(null);
     saveAuthToken(null);
     delete API.defaults.headers.common["Authorization"];
+    navigate("/");
   };
 
   if (isLoading) {
