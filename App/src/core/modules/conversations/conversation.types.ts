@@ -9,4 +9,6 @@ export type Conversation = {
   name: string;
   members: Member[];
   messages: string[];
+  createdAt: Date;
+  updatedAt: Date;
 };

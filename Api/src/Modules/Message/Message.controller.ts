@@ -39,6 +39,24 @@ const sendMessage = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
+const getMessagesByIds = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { ids } = req.body;
+
+    const messages = await MessageModel.find({
+      _id: { $in: ids },
+    });
+
+    res.json(messages);
+  } catch (err) {
+    next(err);
+  }
+};
+
 const getMessages = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { user } = req as AuthRequest;
@@ -85,4 +103,4 @@ const markMessageAsRead = async (
   }
 };
 
-export { sendMessage, getMessages, markMessageAsRead };
+export { sendMessage, getMessagesByIds, getMessages, markMessageAsRead };

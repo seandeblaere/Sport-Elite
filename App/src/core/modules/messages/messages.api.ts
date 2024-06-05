@@ -10,7 +10,7 @@ const sendMessage = (
 };
 
 const getMessages = (conversationId: string) => {
-  return API.get<Message[]>(`/conversation/${conversationId}/messages`);
+  return API.get<Message[]>(`/conversations/${conversationId}/messages`);
 };
 
 const markMessageAsRead = (messageId: string) => {
