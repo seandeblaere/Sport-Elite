@@ -11,7 +11,7 @@ import ProductCreate from "../components/Pages/Products/Create";
 export const commonRoutes = (
   handleLogin: (user: any, token: string, refreshtoken: string) => void
 ) => [
-  { path: "/", element: <Home /> },
+  { path: "/", element: <Products /> },
   { path: "/login", element: <Login onLogin={handleLogin} /> },
   { path: "/register", element: <Register onLogin={handleLogin} /> },
   { path: "/products", element: <Products /> },

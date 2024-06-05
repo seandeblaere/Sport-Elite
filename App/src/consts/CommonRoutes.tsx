@@ -14,13 +14,12 @@ interface CommonRoutesProps {
 
 const CommonRoutes: React.FC<CommonRoutesProps> = ({ handleLogin }) => (
   <>
-    <Route path={ROUTES.home} element={<Home />} />
+    <Route path={ROUTES.home} element={<Products />} />
     <Route path={ROUTES.login} element={<Login onLogin={handleLogin} />} />
     <Route
       path={ROUTES.register}
       element={<Register onLogin={handleLogin} />}
     />
-    <Route path={ROUTES.products} element={<Products />} />
     <Route path={ROUTES.productDetail} element={<ProductDetail />} />
     <Route path={ROUTES.notFound} element={<Login onLogin={handleLogin} />} />
   </>

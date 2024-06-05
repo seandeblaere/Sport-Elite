@@ -4,7 +4,6 @@ const ROUTES = {
   register: "/register",
   profile: "/profile",
   dashboard: "/dashboard",
-  products: "/products",
   productDetail: "/products/:productId",
   productCreate: "/create",
   shoppingCart: "/cart",

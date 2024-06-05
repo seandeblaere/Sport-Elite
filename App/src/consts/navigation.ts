@@ -11,16 +11,12 @@ const useNavigation = () => {
     const getNavigation = (): { label: string; link: string }[] => {
       if (!user) {
         return [
-          { label: "Home", link: "/" },
-          { label: "Products", link: "/products" },
+          { label: "Products", link: "/" },
           { label: "Login", link: "/login" },
         ];
       }
 
-      const baseNavigation = [
-        { label: "Home", link: "/" },
-        { label: "Products", link: "/products" },
-      ];
+      const baseNavigation = [{ label: "Products", link: "/" }];
 
       if (user.admin || user.seller) {
         return [
