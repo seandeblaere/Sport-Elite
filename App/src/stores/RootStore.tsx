@@ -4,7 +4,7 @@ class RootStore {
   productStore: ProductStore;
 
   constructor() {
-    this.productStore = new ProductStore();
+    this.productStore = new ProductStore(this);
   }
 }
 

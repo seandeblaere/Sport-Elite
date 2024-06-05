@@ -6,7 +6,7 @@
 .card {
   position: relative;
   overflow: hidden;
-  width: 18rem;
+  width: calc((60rem - 2rem) / 3);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   border: 2px solid #e5dfdf;
   /* background-color: #f5f5f5; */

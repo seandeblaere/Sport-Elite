@@ -1,13 +1,17 @@
 import { useAuth } from "../../Context/AuthContainer";
+import Header from "../../../components/Design/Header/Header";
 
 const Dashboard = () => {
   const { user } = useAuth();
 
   if (user)
     return (
-      <div>
-        <h1>Welcome, {user.name}</h1>
-      </div>
+      <>
+        <Header />
+        <div>
+          <h1>Welcome, {user.name}</h1>
+        </div>
+      </>
     );
 };
 

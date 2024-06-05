@@ -1,17 +1,19 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import style from "./BigPrimaryButton.module.css";
 
 interface BigPrimaryButtonProps {
-  to: string;
+  onClick: () => void;
   label: string;
 }
 
-const BigPrimaryButton: React.FC<BigPrimaryButtonProps> = ({ to, label }) => {
+const BigPrimaryButton: React.FC<BigPrimaryButtonProps> = ({
+  onClick,
+  label,
+}) => {
   return (
-    <Link to={to} className={style.btn}>
+    <button className={style.btn} onClick={onClick}>
       {label}
-    </Link>
+    </button>
   );
 };
 

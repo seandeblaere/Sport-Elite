@@ -1,7 +1,5 @@
-import { makeAutoObservable } from "mobx";
-
 interface IProduct {
-  id: string;
+  _id: string;
   name: string;
   sellerId: string;
   price: number;
@@ -13,7 +11,7 @@ interface IProduct {
 }
 
 class Product {
-  id: string;
+  _id: string;
   name: string;
   sellerId: string;
   price: number;
@@ -24,7 +22,7 @@ class Product {
   imageUrl: string;
 
   constructor({
-    id,
+    _id,
     name,
     sellerId,
     price,
@@ -34,7 +32,7 @@ class Product {
     weight,
     imageUrl,
   }: IProduct) {
-    this.id = id;
+    this._id = _id;
     this.name = name;
     this.sellerId = sellerId;
     this.price = price;
@@ -43,17 +41,11 @@ class Product {
     this.grip = grip;
     this.weight = weight;
     this.imageUrl = imageUrl;
-
-    makeAutoObservable(this);
-  }
-
-  changeName(newName: string) {
-    this.name = newName;
   }
 
   get asJson() {
     return {
-      id: this.id,
+      id: this._id,
       name: this.name,
       sellerId: this.sellerId,
       price: this.price,

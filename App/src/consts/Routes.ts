@@ -1,11 +1,14 @@
 const ROUTES = {
   home: "/",
-  notFound: "*",
   login: "/login",
   register: "/register",
+  profile: "/profile",
   dashboard: "/dashboard",
   products: "/products",
   productDetail: "/products/:productId",
+  productCreate: "/create",
+  shoppingCart: "/cart",
+  notFound: "*",
 };
 
 export default ROUTES;

@@ -4,6 +4,7 @@ import { Document } from "mongoose";
 export type UserMethods = {
   comparePassword: (password: string) => Promise<boolean>;
   generateToken: () => string;
+  generateRefreshToken: () => string;
 };
 
 export type User = Document &
@@ -16,4 +17,5 @@ export type User = Document &
     admin?: boolean;
     favorites: ObjectId[];
     orders: ObjectId[];
+    refreshToken?: string;
   };

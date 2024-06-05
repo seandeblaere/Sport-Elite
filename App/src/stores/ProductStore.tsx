@@ -1,8 +1,8 @@
-import { makeAutoObservable } from "mobx";
 import Product from "../models/Products";
+import RootStore from "./RootStore";
 
 interface IProduct {
-  id: string;
+  _id: string;
   name: string;
   sellerId: string;
   price: number;
@@ -15,21 +15,31 @@ interface IProduct {
 
 class ProductStore {
   products: Product[] = [];
+  rootStore: RootStore;
 
-  constructor() {
-    makeAutoObservable(this);
+  constructor(rootStore: RootStore) {
+    this.rootStore = rootStore;
+    this.products = [];
   }
 
-  setProducts(products: IProduct[]) {
-    this.products = products.map((product) => new Product(product));
+  getProducts() {
+    return this.products;
+  }
+
+  setProducts(newProducts: IProduct[]) {
+    const products = newProducts.map((product) => new Product(product));
+    return (this.products = products);
   }
 
   addProduct(product: IProduct) {
     this.products.push(new Product(product));
   }
 
-  removeProduct(productId: string) {
-    this.products = this.products.filter((product) => product.id !== productId);
+  removeProduct(product: IProduct) {
+    const index = this.products.findIndex((p) => p._id === product._id);
+    if (index !== -1) {
+      this.products.splice(index, 1);
+    }
   }
 }
 

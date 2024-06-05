@@ -40,6 +40,10 @@ const userSchema = new mongoose.Schema(
         ref: "Order",
       },
     ],
+    refreshToken: {
+      type: String,
+      required: false,
+    },
   },
   {
     timestamps: true,
@@ -87,6 +91,12 @@ userSchema.methods = {
     const user = this;
     return jwt.sign({ _id: user._id }, process.env.JWT_SECRET ?? "", {
       expiresIn: 60 * 120,
+    });
+  },
+  generateRefreshToken: function () {
+    const user = this;
+    return jwt.sign({ _id: user._id }, process.env.JWT_REFRESH_SECRET ?? "", {
+      expiresIn: "7d",
     });
   },
 };

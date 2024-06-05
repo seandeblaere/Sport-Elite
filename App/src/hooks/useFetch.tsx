@@ -3,22 +3,18 @@ import { AxiosResponse } from "axios";
 
 const useFetch = <T,>(
   fetchFunction: () => Promise<AxiosResponse<T>>,
-  existingData: T | null
+  existingdata: T | null
 ) => {
-  const [data, setData] = useState<T | null>(existingData);
+  const [data, setData] = useState<T | null>(existingdata);
   const [error, setError] = useState<Error | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const fetchData = useCallback(async () => {
-    setIsLoading(true);
-
-    if (
-      (Array.isArray(existingData) && existingData.length > 0) ||
-      (!Array.isArray(existingData) && existingData)
-    ) {
+    if (Array.isArray(existingdata) && existingdata.length > 0) {
       return;
     } else {
       try {
+        setIsLoading(true);
         const response = await fetchFunction();
         setData(response.data);
         setError(null);
@@ -28,6 +24,7 @@ const useFetch = <T,>(
         setIsLoading(false);
       }
     }
+    setIsLoading(false);
   }, []);
 
   useEffect(() => {

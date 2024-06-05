@@ -1,66 +1,88 @@
-import { getProductById } from "../../../core/modules/products/products.api";
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-
-interface Product {
-  _id?: string;
-  name: string;
-  sellerId: string;
-  price: number;
-  age: string;
-  brand: string;
-  grip: string;
-  weight: string;
-  imageUrl: string;
-}
+import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
+import { Product } from "../../../core/modules/products/products.types";
+import style from "./Detail.module.css";
+import CountButton from "../../../components/Design/Buttons/Count/CountButton";
+import BigPrimaryButton from "../../../components/Design/Buttons/Big/Primary/BigPrimaryButton";
+import Header from "../../../components/Design/Header/Header";
 
 const ProductDetail: React.FC = () => {
-  const { productId } = useParams<{ productId: string }>();
-  const [product, setProduct] = useState<Product | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const location = useLocation();
+  const productData = location.state?.productData as Product;
+  const [count, setCount] = useState<number>(1);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const response = await getProductById(productId!);
-        setProduct(response.data);
-        setError(null);
-      } catch (error) {
-        setError("Failed to fetch product details");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-
-    return () => {};
-  }, [productId]);
-
-  if (loading) {
-    return <div>Loading...</div>;
+  if (!productData) {
+    return <div>Product not found.</div>;
   }
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
+  const handleAddToCart = () => {
+    const cartItems = JSON.parse(localStorage.getItem("cart") || "[]");
+    const itemIndex = cartItems.findIndex(
+      (item: any) => item.id === productData._id
+    );
 
-  if (!product) {
-    return <div>Product not found</div>;
-  }
+    if (itemIndex > -1) {
+      cartItems[itemIndex].quantity += count;
+    } else {
+      cartItems.push({ ...productData, quantity: count });
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cartItems));
+    alert("Product added to cart!");
+  };
 
   return (
-    <div>
-      <h1>{product.name}</h1>
-      <img src={product.imageUrl} alt={product.name} />
-      <p>Price: €{product.price}</p>
-      <p>Age: {product.age}</p>
-      <p>Brand: {product.brand}</p>
-      <p>Grip: {product.grip}</p>
-      <p>Weight: {product.weight}</p>
-    </div>
+    <>
+      <Header />
+      <div className={style["content-wrapper"]}>
+        <div>
+          <p className={style["breadcrumbs"]}>
+            Home / Sports / Tennis / Tennis Rackets / {productData.name}
+          </p>
+          <div className={style["product"]}>
+            <div className={style["image"]}>
+              <img
+                src={productData.imageUrl}
+                alt={`${productData.name} image`}
+              />
+            </div>
+            <div className={style["product-details"]}>
+              <div className={style["info"]}>
+                <h3>{productData.name}</h3>
+                <p>€{productData.price}</p>
+              </div>
+              <div className={style["grip"]}>
+                <h4>Grip size:</h4>
+                <div className={style["grip-size"]}>
+                  <p>{productData.grip}</p>
+                </div>
+              </div>
+              <div className={style["shopping-cart"]}>
+                <div className={style["container"]}>
+                  <div className={style["text-container"]}>
+                    <p>
+                      Order today,{" "}
+                      <span className={style["delivered"]}>delivered</span>
+                      tomorrow
+                    </p>
+                  </div>
+                  <div className={style["btn-container"]}>
+                    <CountButton
+                      initialCount={count}
+                      onCountChange={(newCount) => setCount(newCount)}
+                    />
+                    <BigPrimaryButton
+                      onClick={handleAddToCart}
+                      label="Add to shopping cart"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
   );
 };
 

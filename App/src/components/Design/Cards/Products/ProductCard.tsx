@@ -1,29 +1,32 @@
 import React from "react";
 import style from "./ProductCard.module.css";
 import { Link } from "react-router-dom";
+import { Product } from "../../../../core//modules/products/products.types";
 
 interface ProductCardProps {
-  imageUrl: string;
-  link: string;
-  name: string;
-  price: number;
+  productData: Product;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({
-  imageUrl,
-  link,
-  name,
-  price,
-}) => {
+const ProductCard: React.FC<ProductCardProps> = ({ productData }) => {
   return (
-    <Link to={link} className={style["card-link"]}>
+    <Link
+      to={{
+        pathname: `/products/${productData._id}`,
+      }}
+      state={{ productData }}
+      className={style["card-link"]}
+    >
       <div className={style.card}>
         <div className={style["image-container"]}>
-          <img src={imageUrl} alt="Image" className={style["card-image"]} />
+          <img
+            src={productData.imageUrl}
+            alt="Image"
+            className={style["card-image"]}
+          />
         </div>
         <div className={style["text-wrapper"]}>
-          <h4>{name}</h4>
-          <p>€{price}</p>
+          <h4>{productData.name}</h4>
+          <p>€{productData.price}</p>
         </div>
       </div>
     </Link>

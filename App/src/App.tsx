@@ -6,9 +6,11 @@ import AuthContainer from "./components/Context/AuthContainer";
 
 function App() {
   return (
-    <AuthContainer>
-      <Route path={ROUTES.dashboard} element={<Dashboard />} />
-    </AuthContainer>
+    <>
+      <AuthContainer>
+        <Route path={ROUTES.dashboard} element={<Dashboard />} />
+      </AuthContainer>
+    </>
   );
 }
 
